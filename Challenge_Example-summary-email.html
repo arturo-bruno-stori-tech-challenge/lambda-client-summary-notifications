@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content=" transactions summary">
+    <meta name="author" content="Arturo Bruno <abrunocarrillo@gmail.com>">
+    <title> transactions summary</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/jumbotron/">
+
+    <link href="https://getbootstrap.com/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap");body,html{padding:0;margin:0;font-family:Rubik;background-color:#f6f8fb}.testimonial-card{background:linear-gradient(11.31deg,#00677f 12.12%,#25c4b9 74.96%,#2cd5c4 90.91%);box-shadow:0 4px 10px rgba(0,0,0,.15)}
+
+        body,html {
+            font-family:Rubik;
+            background-color:#f6f8fb
+        }
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .b-example-divider {
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <div class="container py-4">
+        <header class="pb-3 mb-4 border-bottom">
+            <a href="https://www.storicard.com/" target="_blank" class="d-flex align-items-center text-dark text-decoration-none">
+                <img alt="Stori" src="https://www.storicard.com/_next/static/media/logo.9a85efb3.svg" >
+            </a>
+        </header>
+
+        <main>
+            <div class="p-5 mb-4 bg-light rounded-3">
+                <div class="container-fluid py-5">
+                    <h1 class="display-5 fw-bold">Hi Challenge Example,</h1>
+                    <p class="col-md-8 fs-4">
+                        Hope you are doing great!<br>
+                        Please find your transactions summary below
+                    </p>
+                </div>
+            </div>
+
+            <div class="row justify-content-center text-center">
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Total balance</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">$39.74</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Average debit</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">$-15.38</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Average credit</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">$35.25</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+
+        <div class="row align-items-md-stretch">
+            <div class="table-responsive">
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th style="width: 34%;">Month</th>
+                            <th style="width: 22%;">Number of transactions</th>
+                            <th style="width: 22%;">Average debit</th>
+                            <th style="width: 22%;">Average credit</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        
+                            <tr>
+                                <th>August</th>
+                                <td>2</td>
+                                <td>$-20.46</td>
+                                <td>$10.0</td>
+                            </tr>
+                        
+                            <tr>
+                                <th>July</th>
+                                <td>2</td>
+                                <td>$-10.3</td>
+                                <td>$60.5</td>
+                            </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer class="pt-3 mt-4 text-muted border-top">
+            &copy; Stori | Arturo Bruno | Tech Challenge | 2022
+        </footer>
+    </div>
+</main>
+</body>
+</html>
