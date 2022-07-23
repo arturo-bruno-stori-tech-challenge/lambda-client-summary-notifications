@@ -1,7 +1,9 @@
 import os
 import json
+import uuid
 import boto3
 import pymysql
+from io import StringIO
 from pathlib import Path
 from jinja2 import Environment, BaseLoader
 
@@ -10,10 +12,9 @@ CHARSET = 'UTF-8'
 AWS_REGION = 'us-east-2'
 CONFIGURATION_SET = 'ConfigSet'
 SENDER = 'abrunocarrillo@gmail.com'
-
+PUBLIC_BUCKET = 'transactions-summaries-htmls'
 
 s3 = boto3.client('s3')
-s3_resource = boto3.resource('s3')
 ses = boto3.client('ses', region_name=AWS_REGION)
 
 rds_host = os.getenv('RDS_HOST')
@@ -66,12 +67,38 @@ def calculate_plain_text_summary(client_name, transactions: dict):
     return summary
 
 
+def save_to_s3(bucket: str, file_content: str):
+    print(f'Saving email notification to public S3 bucket {bucket}')
+    file = StringIO(file_content)
+    filename = f'{uuid.uuid4()}.html'
+    expiration = 12 * 24 * 60  # 12 hours
+    s3.put_object(Body=file.getvalue(), Bucket=bucket, Key=filename)
+
+    print(f'Getting public url for {bucket}/{filename}')
+    return s3.generate_presigned_url(
+        'get_object',
+        Params={
+            'Key': filename,
+            'Bucket': bucket,
+            'ResponseContentType': 'text/html',
+            'ResponseContentDisposition': 'inline'
+        },
+        ExpiresIn=expiration
+    )
+
+
 def send_email(client: dict, transactions: dict):
     subject = 'Transactions summary'
     recipient = SENDER  # client['email'] For demo purpose, send the email to me
 
     email_template = Path(Path(__file__).parent, 'email_summary.html')
     template = Environment(loader=BaseLoader()).from_string(email_template.read_text())
+    html_text = template.render(**transactions)
+
+    # Save template for public S3
+    transactions['email_public_url'] = save_to_s3(PUBLIC_BUCKET, html_text)
+
+    # now, re-render the template with the public URL to send the email
     html_text = template.render(**transactions)
     plain_text = calculate_plain_text_summary(client['name'], transactions)
 
