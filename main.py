@@ -138,8 +138,9 @@ def send_email(client: dict, transactions: dict):
 
 def lambda_handler(event, context):
     print(f'Received event: {json.dumps(event)}')
+    sns_message = json.loads(event['Records'][0]['Sns']['Message'])
 
-    client_id = event['client_id']
+    client_id = sns_message['client_id']
     client = get_client(client_id)
     client_transactions = get_client_transactions(client['id'])
     transactions = {
