@@ -7,10 +7,13 @@ Lambda function to send the client summary notification
 * Send email
 
 ## Environment variables needed
-* RDS_HOST
-* RDS_USERNAME
-* RDS_PASSWORD
-* RDS_DATABASE
+ * SENDER
+ * AWS_REGION
+ * S3_TRANSACTIONS_SUMMARY_HTMLS_BUCKET
+ * RDS_HOST
+ * RDS_USERNAME
+ * RDS_PASSWORD
+ * RDS_DATABASE
 
 ## Tables needed in database
 * clients

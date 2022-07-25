@@ -9,18 +9,17 @@ from jinja2 import Environment, BaseLoader
 
 
 CHARSET = 'UTF-8'
-AWS_REGION = 'us-east-2'
-CONFIGURATION_SET = 'ConfigSet'
-SENDER = 'abrunocarrillo@gmail.com'
-PUBLIC_BUCKET = 'transactions-summaries-htmls'
-
-s3 = boto3.client('s3')
-ses = boto3.client('ses', region_name=AWS_REGION)
-
+AWS_REGION = os.getenv('AWS_REGION', 'us-east-2')
+SENDER = os.getenv('SENDER', 'abrunocarrillo@gmail.com')
+PUBLIC_BUCKET = os.getenv('S3_TRANSACTIONS_SUMMARY_HTMLS_BUCKET')
 rds_host = os.getenv('RDS_HOST')
 rds_username = os.getenv('RDS_USERNAME')
 rds_password = os.getenv('RDS_PASSWORD')
 rds_database = os.getenv('RDS_DATABASE')
+
+s3 = boto3.client('s3')
+ses = boto3.client('ses', region_name=AWS_REGION)
+
 
 try:
     db = pymysql.connect(
@@ -140,7 +139,7 @@ def send_email(client: dict, transactions: dict):
 def lambda_handler(event, context):
     print(f'Received event: {json.dumps(event)}')
 
-    client_id = event['client']
+    client_id = event['client_id']
     client = get_client(client_id)
     client_transactions = get_client_transactions(client['id'])
     transactions = {
@@ -194,4 +193,4 @@ def lambda_handler(event, context):
 
 
 if __name__ == '__main__':
-    lambda_handler({'client': 5}, None)
+    lambda_handler({'client_id': 5}, None)
