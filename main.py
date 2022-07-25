@@ -102,8 +102,9 @@ def send_email(client: dict, transactions: dict):
     plain_text = calculate_plain_text_summary(client['name'], transactions)
 
     # For local development
-    parsed = Path(Path(__file__).parent, f'{client["name"].replace(" ", "_")}-summary-email.html')
-    parsed.write_text(html_text)
+    if os.environ.get("AWS_EXECUTION_ENV") is not None:
+        parsed = Path(Path(__file__).parent, f'{client["name"].replace(" ", "_")}-summary-email.html')
+        parsed.write_text(html_text)
 
     try:
         response = ses.send_email(
